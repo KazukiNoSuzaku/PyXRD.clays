@@ -7,7 +7,7 @@ All source lives under `data/lib/python3.8/site-packages/pyxrd/` (bundled instal
 ## Repository
 - GitHub: KazukiNoSuzaku/PyXRD
 - Main branch: `main`
-- Working branch: `V.2`
+- Working branch: `V.3`
 
 ## Key Decisions
 - **Pyro4 server is disabled.** `pyxrd/data/settings.py` uses only `DummyAsyncServerProvider`.
