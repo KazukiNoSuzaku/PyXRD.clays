@@ -30,6 +30,10 @@ data/lib/python3.8/site-packages/mpl_toolkits/
 data/lib/python3.8/site-packages/pytz/
 data/lib/python3.8/site-packages/pytz-*.dist-info/
 
+# PyInstaller output
+dist/
+build/
+
 # Python bytecode
 __pycache__/
 *.pyc
