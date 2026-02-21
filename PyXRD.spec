@@ -18,15 +18,17 @@ for ext in ('*.ui', '*.png', '*.svg', '*.ico', '*.csv', '*.json', '*.lbl'):
         rel = f.parent.relative_to(src)
         datas.append((str(f), str(rel)))
 
-# Collect numpy fully (C-extensions need special handling)
+# Collect numpy and scipy fully (C-extensions need special handling)
 numpy_datas, numpy_binaries, numpy_hidden = collect_all('numpy')
-datas += numpy_datas
+scipy_datas, scipy_binaries, scipy_hidden = collect_all('scipy')
+datas += numpy_datas + scipy_datas
 
 # Collect all submodules so nothing is missed
 hidden = (
     collect_submodules('pyxrd') +
     collect_submodules('mvc') +
     numpy_hidden +
+    scipy_hidden +
     [
         'PySide6.QtCore',
         'PySide6.QtGui',
@@ -40,13 +42,13 @@ hidden = (
 a = Analysis(
     ['launcher.py'],
     pathex=[str(src)],
-    binaries=numpy_binaries,
+    binaries=numpy_binaries + scipy_binaries,
     datas=datas,
     hiddenimports=hidden,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=['gtk', 'gi', 'cairo', 'Gtk', 'scipy', 'pkg_resources', 'setuptools', 'Pyro4'],
+    excludes=['gtk', 'gi', 'cairo', 'Gtk', 'pkg_resources', 'setuptools', 'Pyro4', 'pytest', '_pytest'],
     noarchive=False,
     optimize=0,
 )
