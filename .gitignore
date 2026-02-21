@@ -40,6 +40,9 @@ runtime/Lib/
 # Old GTK Python 3.8 runtime (replaced by runtime/)
 data/bin/
 
+# Removed GTK adapter layer
+data/lib/python3.8/site-packages/mvc/adapters/gtk_support/
+
 # Python bytecode
 __pycache__/
 *.pyc
