@@ -1,0 +1,42 @@
+name: Build Windows Installer
+
+on:
+  # Run automatically when a version tag is pushed (e.g. v0.8.4)
+  push:
+    tags:
+      - 'v*'
+  # Also allow a manual trigger from the GitHub Actions UI
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Inno Setup 6
+        run: choco install innosetup --version 6.3.3 -y --no-progress
+
+      - name: Build installer
+        shell: cmd
+        run: |
+          "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" pyxrd.iss
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PyXRD.clays-Windows-Installer
+          path: dist\*.exe
+          if-no-files-found: error
+
+      # Create a GitHub Release and attach the installer when triggered by a tag
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist\*.exe
+          generate_release_notes: true
