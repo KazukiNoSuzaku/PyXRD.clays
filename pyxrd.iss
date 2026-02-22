@@ -9,7 +9,8 @@
 #define AppPublisher "PyXRD.clays Contributors"
 #define AppURL       "https://github.com/KazukiNoSuzaku/PyXRD"
 #define AppExeName   "pyxrd.exe"
-#define AppIconFile  "lib\python3.8\site-packages\pyxrd\application\icons\pyxrd.ico"
+#define AppIconFile     "data\lib\python3.8\site-packages\pyxrd\application\icons\pyxrd.ico"
+#define AppIconInstalled "lib\python3.8\site-packages\pyxrd\application\icons\pyxrd.ico"
 
 [Setup]
 AppId={{B3F7A2C1-4D9E-4F1B-8E6A-0C2D5A3B7E9F}
@@ -64,12 +65,12 @@ Source: "data\*"; DestDir: "{app}"; \
 [Icons]
 ; Start Menu
 Name: "{group}\{#AppName}";                    Filename: "{app}\bin\{#AppExeName}"; \
-    IconFilename: "{app}\{#AppIconFile}"
+    IconFilename: "{app}\{#AppIconInstalled}"
 Name: "{group}\{cm:UninstallProgram,{#AppName}}"; Filename: "{uninstallexe}"
 
 ; Desktop (optional)
 Name: "{autodesktop}\{#AppName}"; Filename: "{app}\bin\{#AppExeName}"; \
-    IconFilename: "{app}\{#AppIconFile}"; Tasks: desktopicon
+    IconFilename: "{app}\{#AppIconInstalled}"; Tasks: desktopicon
 
 [Run]
 Filename: "{app}\bin\{#AppExeName}"; \
